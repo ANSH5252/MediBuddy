@@ -1,0 +1,7 @@
+.logo img {
+  border-radius: 50%;  /* Makes the image circular */
+  object-fit: cover;   /* Ensures image covers the box nicely */
+  width: 50px;         /* Match the width you use in HTML */
+  height: 50px;        /* Match the height you use in HTML */
+  display: block;      /* Remove inline spacing issues */
+}
