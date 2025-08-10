@@ -1,13 +1,29 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>About</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-LN+7fdVzj6u52u30Kp6M/trliBMCMKTyK833zpbD+pXdCLuTusPj697FH4R/5mcr" crossorigin="anonymous">
-  </head>
-  <body>
-    <h1>About</h1>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js" integrity="sha384-ndDqU0Gzau9qJ1lfW4pNLlhNTkCfHzAVBReH9diLvGRem5+R9g2FzA8ZGN954O5Q" crossorigin="anonymous"></script>
-  </body>
-</html>
+{% extends "base.html" %}
+
+{% block title %}
+About MediBuddy
+{% endblock %}
+
+{% block content %}
+<div class="container my-5">
+  <h1 class="mb-4">Welcome to MediBuddy!</h1>
+
+  <p><strong>MediBuddy</strong> is an intelligent and compassionate personal health companion designed to empower you on your journey to better health. By simply entering the symptoms you’re experiencing, MediBuddy leverages cutting-edge machine learning technology to accurately identify possible diseases and health conditions — all from the comfort of your home.</p>
+
+  <p>We believe that understanding your health is the first step towards taking control. MediBuddy goes beyond just predicting diseases; it provides you with a wealth of detailed information, guidance, and practical advice to support your well-being every step of the way.</p>
+
+  <h3>Discover What MediBuddy Can Do for You:</h3>
+  <ul>
+    <li><strong>Accurate Symptom-Based Disease Prediction:</strong> Utilizing advanced algorithms, MediBuddy analyzes your symptoms to suggest the most likely health conditions, helping you understand what might be affecting you.</li>
+    <li><strong>Comprehensive Disease Insights:</strong> Gain access to detailed information about each condition, including common symptoms, causes, and potential risk factors.</li>
+    <li><strong>Practical Precautions:</strong> Learn important preventive measures and lifestyle changes to protect your health and avoid complications.</li>
+    <li><strong>Medication Guidance:</strong> Understand common medications prescribed for your condition and their purpose, helping you be better informed during doctor visits.</li>
+    <li><strong>Personalized Diet and Workout Plans:</strong> Receive tailored recommendations on nutrition and exercise to support recovery and promote long-term wellness.</li>
+    <li><strong>Symptom Severity Assessment:</strong> Evaluate how serious your symptoms are, guiding you on when to seek urgent medical care versus home management.</li>
+  </ul>
+
+  <p>With <strong>MediBuddy</strong> by your side, healthcare becomes more accessible, transparent, and proactive. Whether you’re managing ongoing health issues or simply want to stay informed, MediBuddy is your reliable partner for smarter, data-driven health decisions.</p>
+
+  <p>Take charge of your health today with MediBuddy — your personal guide to understanding, managing, and improving your well-being.</p>
+</div>
+{% endblock %}
