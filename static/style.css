@@ -1,7 +1,88 @@
 .logo img {
-  border-radius: 50%;  /* Makes the image circular */
-  object-fit: cover;   /* Ensures image covers the box nicely */
-  width: 50px;         /* Match the width you use in HTML */
-  height: 50px;        /* Match the height you use in HTML */
-  display: block;      /* Remove inline spacing issues */
+  border-radius: 50%;
+  object-fit: cover;
+  width: 50px;        
+  height: 50px;      
+  display: block;  
+}
+
+.navbar-nav .nav-link.active {
+    background-color:  #28a745 !important; /* Bootstrap primary blue background */
+    color: white !important;
+    border-radius: 0.25rem;
+    font-weight: 600;
+}
+
+body {
+    background-color: black;
+    color: white;
+}
+
+.symptom-tags-container {
+    background: #1e1e1e;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.search-box {
+    padding: 8px;
+    border-radius: 5px;
+    border: none;
+    width: 250px;
+}
+
+.symptoms-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 8px;
+    margin-top: 15px;
+}
+
+.tag {
+    padding: 6px 10px;
+    background: #444;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    font-size: 14px;
+    transition: background 0.3s;
+}
+
+.tag:hover {
+    background: #666;
+}
+
+.tag.selected {
+    background: #007bff;
+    color: white;
+    margin-right: 1px;
+}
+
+#selected-symptoms {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px; /* space between selected items */
+    padding: 10px;
+}
+
+.selected-symptom {
+    background-color: #444;
+    padding: 5px 10px;
+    border-radius: 5px;
+    color: white;
+}
+
+
+.submit-btn {
+    background: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    margin-top: 15px;
+    cursor: pointer;
+}
+
+.submit-btn:hover {
+    background: #218838;
 }
