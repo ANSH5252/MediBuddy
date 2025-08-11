@@ -3,6 +3,10 @@
 
 {% block content %}
 <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<!-- Add Poppins font -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
 
 <div class="container mt-4">
     <h1 class="text-center">MediBuddy</h1>
@@ -10,8 +14,9 @@
         Welcome to MediBuddy! This is your health companion platform.
     </p>
 
-    <div class="symptom-tags-container">
-        <h2>Select Your Symptoms :</h2>
+    <!-- Symptom Selection Container -->
+    <div id="symptom-selection-container" class="symptom-tags-container">
+        <h2 class="section-title">Select Your Symptoms</h2>
 
         <div class="d-flex justify-content-between align-items-center mb-3">
             <input type="text" class="search-box" id="symptomSearch" placeholder="Search symptoms...">
@@ -23,142 +28,328 @@
 
         <div class="symptoms-grid" id="symptomsContainer"></div>
         
-        <h2>Selected Symptoms:</h2>
+        <h2 class="section-title">Selected Symptoms:</h2>
         <div class="selected-symptoms">
             <div id="selectedList"></div>
         </div>
 
-        <button class="submit-btn" onclick="submitSymptoms()">Get Diagnosis</button>
+        <button class="submit-btn" id="submitBtn">Get Diagnosis</button>
     </div>
 
-    <script>
-        const symptoms = [
-            'itching', 'skin_rash', 'nodal_skin_eruptions', 'continuous_sneezing', 'shivering',
-            'chills', 'joint_pain', 'stomach_pain', 'acidity', 'ulcers_on_tongue',
-            'muscle_wasting', 'vomiting', 'burning_micturition', 'spotting_urination', 'fatigue',
-            'weight_gain', 'anxiety', 'cold_hands_and_feets', 'mood_swings', 'weight_loss',
-            'restlessness', 'lethargy', 'patches_in_throat', 'irregular_sugar_level', 'cough',
-            'high_fever', 'sunken_eyes', 'breathlessness', 'sweating', 'dehydration',
-            'indigestion', 'headache', 'yellowish_skin', 'dark_urine', 'nausea',
-            'loss_of_appetite', 'pain_behind_the_eyes', 'back_pain', 'constipation', 'abdominal_pain',
-            'diarrhoea', 'mild_fever', 'yellow_urine', 'yellowing_of_eyes', 'acute_liver_failure',
-            'fluid_overload', 'swelling_of_stomach', 'swelled_lymph_nodes', 'malaise',
-            'blurred_and_distorted_vision', 'phlegm', 'throat_irritation', 'redness_of_eyes',
-            'sinus_pressure', 'runny_nose', 'congestion', 'chest_pain', 'weakness_in_limbs',
-            'fast_heart_rate', 'pain_during_bowel_movements', 'pain_in_anal_region', 'bloody_stool',
-            'irritation_in_anus', 'neck_pain', 'dizziness', 'cramps', 'bruising', 'obesity',
-            'swollen_legs', 'swollen_blood_vessels', 'puffy_face_and_eyes', 'enlarged_thyroid',
-            'brittle_nails', 'swollen_extremeties', 'excessive_hunger', 'extra_marital_contacts',
-            'drying_and_tingling_lips', 'slurred_speech', 'knee_pain', 'hip_joint_pain',
-            'muscle_weakness', 'stiff_neck', 'swelling_joints', 'movement_stiffness',
-            'spinning_movements', 'loss_of_balance', 'unsteadiness', 'weakness_of_one_body_side',
-            'loss_of_smell', 'bladder_discomfort', 'foul_smell_of_urine', 'continuous_feel_of_urine',
-            'passage_of_gases', 'internal_itching', 'toxic_look_(typhos)', 'depression',
-            'irritability', 'muscle_pain', 'altered_sensorium', 'red_spots_over_body',
-            'belly_pain', 'abnormal_menstruation', 'dischromic_patches', 'watering_from_eyes',
-            'increased_appetite', 'polyuria', 'family_history', 'mucoid_sputum', 'rusty_sputum',
-            'lack_of_concentration', 'visual_disturbances', 'receiving_blood_transfusion',
-            'receiving_unsterile_injections', 'coma', 'stomach_bleeding', 'distention_of_abdomen',
-            'history_of_alcohol_consumption', 'fluid_overload', 'blood_in_sputum',
-            'prominent_veins_on_calf', 'palpitations', 'painful_walking', 'pus_filled_pimples',
-            'blackheads', 'scurring', 'skin_peeling', 'silver_like_dusting', 'small_dents_in_nails',
-            'inflammatory_nails', 'blister', 'red_sore_around_nose', 'yellow_crust_ooze'
-        ];
+    <!-- Loading Spinner -->
+    <div id="loader" class="loader-container hidden">
+        <div class="spinner"></div>
+        <p>Analyzing symptoms...</p>
+    </div>
 
-        let selectedSymptoms = [];
-
-        function renderSymptoms(symptomsToRender = symptoms) {
-            const container = document.getElementById('symptomsContainer');
-            container.innerHTML = '';
+    <!-- Diagnosis Result Section -->
+    <div id="diagnosis-result" class="diagnosis-result-container hidden">
+        <h2 class="section-title">Diagnosis Result</h2>
+        <div id="result-content">
+            <div class="result-card">
+                <p class="card-label">Predicted Disease:</p>
+                <p class="card-value" id="diagnosis-name"></p>
+            </div>
+            <div class="result-card">
+                <p class="card-label">Description:</p>
+                <p class="card-value" id="diagnosis-description"></p>
+            </div>
+            <div class="result-card">
+                <p class="card-label">Severity:</p>
+                <p class="card-value">
+                    <span id="severity-badge" class="severity-badge"></span>
+                </p>
+            </div>
             
-            symptomsToRender.forEach(symptom => {
-                const tag = document.createElement('span');
-                tag.className = 'tag';
-                tag.textContent = symptom.replace(/_/g, ' ');
-                tag.onclick = () => toggleSymptom(symptom);
-                
-                if (selectedSymptoms.includes(symptom)) {
-                    tag.classList.add('selected');
-                }
-                
-                container.appendChild(tag);
-            });
-        }
+            <div class="result-card">
+                <p class="card-label">Precautions:</p>
+                <ul id="precautions-list" class="card-list"></ul>
+            </div>
+            
+            <div class="result-card">
+                <p class="card-label">Medications:</p>
+                <ul id="medications-list" class="card-list"></ul>
+            </div>
+            
+            <div class="result-card">
+                <p class="card-label">Diet:</p>
+                <ul id="diet-list" class="card-list"></ul>
+            </div>
+            
+            <div class="result-card">
+                <p class="card-label">Workout:</p>
+                <ul id="workout-list" class="card-list"></ul>
+            </div>
+        </div>
+        <button id="exitBtn" class="submit-btn">Exit</button>
+    </div>
 
-        function toggleSymptom(symptom) {
-            const index = selectedSymptoms.indexOf(symptom);
-            if (index > -1) {
-                selectedSymptoms.splice(index, 1);
+    <!-- Alert Message Section -->
+    <div id="alert-message" class="diagnosis-result-container hidden">
+        <h2 class="section-title">Information</h2>
+        <div id="alert-content"></div>
+        <button id="alert-exit-btn" class="submit-btn">OK</button>
+    </div>
+</div>
+
+<script>
+    const symptoms = [
+        'itching', 'skin_rash', 'nodal_skin_eruptions', 'continuous_sneezing', 'shivering',
+        'chills', 'joint_pain', 'stomach_pain', 'acidity', 'ulcers_on_tongue', 'muscle_wasting', 
+        'vomiting', 'burning_micturition', 'spotting_urination', 'fatigue', 'weight_gain', 
+        'anxiety', 'cold_hands_and_feets', 'mood_swings', 'weight_loss', 'restlessness', 
+        'lethargy', 'patches_in_throat', 'irregular_sugar_level', 'cough', 'high_fever', 
+        'sunken_eyes', 'breathlessness', 'sweating', 'dehydration', 'indigestion', 'headache', 
+        'yellowish_skin', 'dark_urine', 'nausea', 'loss_of_appetite', 'pain_behind_the_eyes', 
+        'back_pain', 'constipation', 'abdominal_pain', 'diarrhoea', 'mild_fever', 
+        'yellow_urine', 'yellowing_of_eyes', 'acute_liver_failure', 'fluid_overload', 
+        'swelling_of_stomach', 'swelled_lymph_nodes', 'malaise', 'blurred_and_distorted_vision', 
+        'phlegm', 'throat_irritation', 'redness_of_eyes', 'sinus_pressure', 'runny_nose', 
+        'congestion', 'chest_pain', 'weakness_in_limbs', 'fast_heart_rate', 
+        'pain_during_bowel_movements', 'pain_in_anal_region', 'bloody_stool', 'irritation_in_anus', 
+        'neck_pain', 'dizziness', 'cramps', 'bruising', 'obesity', 'swollen_legs', 
+        'swollen_blood_vessels', 'puffy_face_and_eyes', 'enlarged_thyroid', 'brittle_nails', 
+        'swollen_extremeties', 'excessive_hunger', 'extra_marital_contacts', 
+        'drying_and_tingling_lips', 'slurred_speech', 'knee_pain', 'hip_joint_pain', 
+        'muscle_weakness', 'stiff_neck', 'swelling_joints', 'movement_stiffness', 
+        'spinning_movements', 'loss_of_balance', 'unsteadiness', 'weakness_of_one_body_side', 
+        'loss_of_smell', 'bladder_discomfort', 'foul_smell_of_urine', 'continuous_feel_of_urine', 
+        'passage_of_gases', 'internal_itching', 'toxic_look_(typhos)', 'depression', 
+        'irritability', 'muscle_pain', 'altered_sensorium', 'red_spots_over_body', 'belly_pain', 
+        'abnormal_menstruation', 'dischromic_patches', 'watering_from_eyes', 'increased_appetite', 
+        'polyuria', 'family_history', 'mucoid_sputum', 'rusty_sputum', 'lack_of_concentration', 
+        'visual_disturbances', 'receiving_blood_transfusion', 'receiving_unsterile_injections', 
+        'coma', 'stomach_bleeding', 'distention_of_abdomen', 'history_of_alcohol_consumption', 
+        'fluid_overload', 'blood_in_sputum', 'prominent_veins_on_calf', 'palpitations', 
+        'painful_walking', 'pus_filled_pimples', 'blackheads', 'scurring', 'skin_peeling', 
+        'silver_like_dusting', 'small_dents_in_nails', 'inflammatory_nails', 'blister', 
+        'red_sore_around_nose', 'yellow_crust_ooze'
+    ];
+
+    let selectedSymptoms = new Set();
+    
+    // Get the main containers for symptom selection and results
+    const symptomSelectionContainer = document.getElementById('symptom-selection-container');
+    const diagnosisResultContainer = document.getElementById('diagnosis-result');
+    const loaderContainer = document.getElementById('loader');
+    const alertMessageContainer = document.getElementById('alert-message');
+
+    /**
+     * Formats a symptom name by replacing underscores with spaces.
+     * @param {string} symptom The symptom to format.
+     * @returns {string} The formatted symptom name.
+     */
+    function formatSymptomName(symptom) {
+        return symptom.replace(/_/g, ' ');
+    }
+
+    /**
+     * Renders symptom tags based on a filtered list.
+     * @param {Array<string>} symptomsToRender The list of symptoms to display.
+     */
+    function renderSymptoms(symptomsToRender = symptoms) {
+        const container = document.getElementById('symptomsContainer');
+        container.innerHTML = '';
+        
+        symptomsToRender.forEach(symptom => {
+            const tag = document.createElement('span');
+            tag.className = `tag ${selectedSymptoms.has(symptom) ? 'selected' : ''}`;
+            tag.textContent = formatSymptomName(symptom);
+            tag.onclick = () => toggleSymptom(symptom);
+            container.appendChild(tag);
+        });
+    }
+
+    /**
+     * Adds or removes a symptom from the selected symptoms set.
+     * @param {string} symptom The symptom to toggle.
+     */
+    function toggleSymptom(symptom) {
+        if (selectedSymptoms.has(symptom)) {
+            selectedSymptoms.delete(symptom);
+        } else {
+            selectedSymptoms.add(symptom);
+        }
+        updateSelectedList();
+        renderSymptoms();
+    }
+
+    /**
+     * Updates the display of selected symptoms.
+     */
+    function updateSelectedList() {
+        const selectedList = document.getElementById('selectedList');
+        selectedList.innerHTML = '';
+        
+        if (selectedSymptoms.size === 0) {
+            selectedList.innerHTML = 'No symptoms selected yet.';
+            return;
+        }
+        
+        selectedSymptoms.forEach(symptom => {
+            const span = document.createElement('span');
+            span.className = 'selected-tag';
+            span.textContent = formatSymptomName(symptom);
+            span.onclick = () => toggleSymptom(symptom);
+            selectedList.appendChild(span);
+        });
+    }
+
+    /**
+     * Determines the appropriate CSS class for a given severity level.
+     * @param {string} severityLevel The severity level from the API.
+     * @returns {string} The corresponding CSS class.
+     */
+    function getSeverityClass(severityLevel) {
+        const lowerCaseLevel = severityLevel.toLowerCase();
+        if (lowerCaseLevel.includes('severe')) {
+            return 'severity-high';
+        } else if (lowerCaseLevel.includes('moderate')) {
+            return 'severity-moderate';
+        } else {
+            return 'severity-low';
+        }
+    }
+
+    /**
+     * Displays the diagnosis results in the result section.
+     * @param {object} data The diagnosis data from the API.
+     */
+    function displayResults(data) {
+        // Hide other containers and show the result container
+        loaderContainer.classList.add('hidden');
+        alertMessageContainer.classList.add('hidden');
+        symptomSelectionContainer.classList.add('hidden');
+        diagnosisResultContainer.classList.remove('hidden');
+
+        document.getElementById('diagnosis-name').textContent = data.diagnosis;
+        document.getElementById('diagnosis-description').textContent = data.description;
+        
+        const severityBadge = document.getElementById('severity-badge');
+        severityBadge.textContent = data.severity_level;
+        severityBadge.className = `severity-badge ${getSeverityClass(data.severity_level)}`;
+
+        function populateList(id, items) {
+            const list = document.getElementById(id);
+            list.innerHTML = '';
+            // Make sure items is an array before iterating
+            if (Array.isArray(items)) {
+                items.forEach(item => {
+                    const li = document.createElement('li');
+                    li.textContent = item;
+                    list.appendChild(li);
+                });
             } else {
-                selectedSymptoms.push(symptom);
+                list.innerHTML = '<li>No data available.</li>';
             }
-            updateSelectedList();
-            renderSymptoms();
         }
+        
+        populateList('precautions-list', data.precautions);
+        populateList('medications-list', data.medications);
+        populateList('diet-list', data.diet);
+        populateList('workout-list', data.workout);
+    }
+    
+    /**
+     * Displays an alert message to the user.
+     * @param {string} message The message to display.
+     */
+    function displayAlert(message) {
+        symptomSelectionContainer.classList.add('hidden');
+        loaderContainer.classList.add('hidden');
+        diagnosisResultContainer.classList.add('hidden');
+        alertMessageContainer.classList.remove('hidden');
+        document.getElementById('alert-content').innerHTML = `<p>${message}</p>`;
+    }
 
-        function updateSelectedList() {
-            const selectedList = document.getElementById('selectedList');
-            selectedList.innerHTML = '';
-            
-            if (selectedSymptoms.length === 0) {
-                selectedList.innerHTML = '<p>No symptoms selected</p>';
-                return;
-            }
-            
-            selectedSymptoms.forEach(symptom => {
-                const span = document.createElement('span');
-                span.className = 'tag selected';
-                span.textContent = symptom.replace(/_/g, ' ');
-                span.onclick = () => toggleSymptom(symptom);
-                selectedList.appendChild(span);
-            });
+    /**
+     * Hides the alert message and returns to the symptom selection page.
+     */
+    function exitFromAlert() {
+        alertMessageContainer.classList.add('hidden');
+        symptomSelectionContainer.classList.remove('hidden');
+    }
+
+    /**
+     * Resets the application state to the initial symptom selection view.
+     */
+    function exitToSymptomSelection() {
+        diagnosisResultContainer.classList.add('hidden');
+        symptomSelectionContainer.classList.remove('hidden');
+        selectedSymptoms.clear();
+        updateSelectedList();
+        renderSymptoms();
+    }
+
+    /**
+     * Submits the selected symptoms to the backend API.
+     */
+    async function submitSymptoms() {
+        if (selectedSymptoms.size === 0) {
+            displayAlert('Please select at least one symptom to get a diagnosis.');
+            return;
         }
+        
+        // Show loader and hide symptom selection
+        symptomSelectionContainer.classList.add('hidden');
+        loaderContainer.classList.remove('hidden');
 
-        function submitSymptoms() {
-            if (selectedSymptoms.length === 0) {
-                alert('Please select at least one symptom');
-                return;
-            }
-            
-            fetch('/process_symptoms', {
+        try {
+            const response = await fetch('/process_symptoms', {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ symptoms: selectedSymptoms })
-            })
-            .then(response => response.json())
-            .then(data => {
-                alert('Symptoms submitted successfully!\nDiagnosis: ' + data.diagnosis);
-            })
-            .catch(() => {
-                alert('Failed to submit symptoms.');
+                body: JSON.stringify({ symptoms: Array.from(selectedSymptoms) })
             });
+
+            const data = await response.json();
+            
+            if (data.status === 'success') {
+                displayResults(data);
+            } else {
+                displayAlert(`Error: ${data.message || 'An unknown error occurred.'}`);
+            }
+
+        } catch (error) {
+            console.error('Failed to submit symptoms:', error);
+            displayAlert('Failed to get a diagnosis. Please try again.');
         }
+    }
 
-        document.getElementById('symptomSearch').addEventListener('input', (e) => {
-            const searchTerm = e.target.value.toLowerCase();
-            const filteredSymptoms = symptoms.filter(symptom => 
-                symptom.toLowerCase().includes(searchTerm)
-            );
-            renderSymptoms(filteredSymptoms);
-        });
+    // Event listeners
+    document.getElementById('submitBtn').addEventListener('click', submitSymptoms);
+    document.getElementById('exitBtn').addEventListener('click', exitToSymptomSelection);
+    document.getElementById('alert-exit-btn').addEventListener('click', exitFromAlert);
+    
+    document.getElementById('symptomSearch').addEventListener('input', (e) => {
+        const searchTerm = e.target.value.toLowerCase();
+        const filteredSymptoms = symptoms.filter(symptom => 
+            symptom.toLowerCase().includes(searchTerm.replace(/ /g, '_')) ||
+            formatSymptomName(symptom).toLowerCase().includes(searchTerm)
+        );
+        renderSymptoms(filteredSymptoms);
+    });
 
-        // Select All
-        document.getElementById('selectAll').addEventListener('click', () => {
-            selectedSymptoms = [...symptoms];
-            updateSelectedList();
-            renderSymptoms();
-        });
+    document.getElementById('selectAll').addEventListener('click', () => {
+        selectedSymptoms = new Set(symptoms);
+        updateSelectedList();
+        renderSymptoms();
+    });
 
-        // Clear All
-        document.getElementById('clearAll').addEventListener('click', () => {
-            selectedSymptoms = [];
-            updateSelectedList();
-            renderSymptoms();
-        });
+    document.getElementById('clearAll').addEventListener('click', () => {
+        selectedSymptoms.clear();
+        updateSelectedList();
+        renderSymptoms();
+    });
 
-        // Initialize
+    // Initialize on window load
+    window.onload = function() {
         renderSymptoms();
         updateSelectedList();
-    </script>
-</div>
+        // Ensure the symptom selection container is visible on load
+        symptomSelectionContainer.classList.remove('hidden');
+        diagnosisResultContainer.classList.add('hidden');
+        loaderContainer.classList.add('hidden');
+        alertMessageContainer.classList.add('hidden');
+    };
+</script>
 {% endblock %}
