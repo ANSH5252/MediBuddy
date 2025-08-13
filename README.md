@@ -25,5 +25,22 @@ It uses a trained classification model built with **Python** and **Scikit-learn*
 - Web Development with Flask
 - Form-based user input handling
 
-## 🧾 Project Structure
+## 🧠 How It Works
+
+- Data Preprocessing — Reads and cleans the dataset (dataset.csv) containing diseases and their associated symptoms.
+
+- Model Training — Uses classification algorithms to map symptoms to probable diseases.
+  The trained model is saved as model.pkl.
+
+- Prediction Workflow —
+
+  - User selects symptoms via the web interface.
+
+  - The Flask backend loads the trained model.
+
+  - The model predicts the most likely disease.
+
+  - The prediction is displayed to the user.
+
+- Frontend — Built with HTML, Bootstrap, and CSS for a responsive experience.
 
