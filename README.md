@@ -1,46 +1,44 @@
-# 🩺 MediBuddy: Disease Prediction System ⚕️
+# 🩺 MediBuddy – AI-Powered Health Companion
 
-**MediBuddy** is a machine learning-based web application that predicts possible diseases based on symptoms selected by the user.  
-It uses a trained classification model built with **Python** and **Scikit-learn**, and is served via a **Flask** web interface for an easy and interactive user experience.
+MediBuddy is an AI-powered web application that predicts possible diseases based on selected symptoms and provides a complete health guide — including precautions, medications, recommended diets, and workout suggestions.  
+It integrates **Machine Learning models** with a **Flask backend** and a **responsive Bootstrap frontend**.
 
-## 🚀 Features
+---
 
-- **Symptom-based Disease Prediction** — Select multiple symptoms and get the most probable disease instantly.
-- **Machine Learning Model** — Trained on a curated dataset for accurate predictions.
-- **User-friendly Web Interface** — Built with HTML, CSS, and Bootstrap for a clean and responsive design.
-- **Data-driven** — Uses real-world symptom–disease mapping for informed results.
+## 📌 Features
 
-## 📊 Tech Stack
+- **Symptom-based Disease Prediction**  
+  Select one or more symptoms, and MediBuddy predicts the most probable disease using a trained ML model.
 
-**Language:** Python 🐍 , HTML , CSS 
+- **Multiple Health Datasets**  
+  - Disease descriptions  
+  - Symptom–severity mapping  
+  - Medications  
+  - Diet plans  
+  - Workouts  
+  - Precautionary measures
 
-**Libraries:**
-- `pandas`, `numpy` — Data manipulation and analysis
-- `scikit-learn` — Model training and prediction
-- `Flask` — Web framework for the application
-- `pickle` — Model serialization
+- **AI Model Selection**  
+  Various models tested (SVC, RandomForest, Naive Bayes, XGBoost) → **SVC chosen** for best accuracy.
 
-**Techniques Used:**
-- Classification Algorithms
-- Web Development with Flask
-- Form-based user input handling
+- **Severity Calculation**  
+  Calculates how critical the symptoms are and provides an urgency level.
 
-## 🧠 How It Works
+- **User-Friendly Interface**  
+  Responsive Bootstrap design for easy navigation and quick symptom selection.
 
-- Data Preprocessing — Reads and cleans the dataset (dataset.csv) containing diseases and their associated symptoms.
+---
 
-- Model Training — Uses classification algorithms to map symptoms to probable diseases.
-  The trained model is saved as model.pkl.
+## 🛠 Tech Stack
 
-- Prediction Workflow —
+- **Frontend:** HTML, CSS, JavaScript, Bootstrap
+- **Backend:** Python, Flask
+- **Machine Learning:** scikit-learn, XGBoost
+- **Data Handling:** pandas, NumPy
+- **Model Persistence:** pickle
+- **Other Tools:** Jupyter Notebook (model training)
 
-  - User selects symptoms via the web interface.
+---
 
-  - The Flask backend loads the trained model.
-
-  - The model predicts the most likely disease.
-
-  - The prediction is displayed to the user.
-
-- Frontend — Built with HTML, Bootstrap, and CSS for a responsive experience.
+## 📂 Project Structure
 
