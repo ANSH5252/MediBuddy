@@ -3,8 +3,53 @@
 
 {% block content %}
 <div class="container mt-4">
-    <h1>Blog</h1>
-    <p>
-    </p>
+    <h1>📝 Blog</h1>
+    <hr>
+
+    <article>
+        <h2>🚀 Building MediBuddy – My Journey</h2>
+        <p>
+            MediBuddy began as a simple idea: <em>“Can AI help predict diseases faster and more accurately?”</em>  
+            Over time, it grew into a full-fledged health companion web application.
+            I worked extensively with datasets containing symptoms, severities, precautions, diets, workouts, and medications.  
+            Multiple machine learning algorithms were tested — <strong>Random Forest</strong>, <strong>XGBoost</strong>, <strong>Naive Bayes</strong>, and more — 
+            but the <strong>Support Vector Classifier (SVC)</strong> consistently produced the most reliable predictions.
+        </p>
+        <p>
+            The challenge was not just in achieving high accuracy but also in ensuring that the model could handle incomplete or vague symptom inputs.
+            Data preprocessing, missing value handling, and symptom mapping were critical steps.  
+            On the frontend, I built a clean and intuitive UI using <strong>Bootstrap</strong> to ensure easy navigation for users of all ages.
+        </p>
+    </article>
+
+    <article>
+        <h2>⚙️ Technical Highlights</h2>
+        <ul>
+            <li><strong>Backend:</strong> Flask framework for API endpoints and model integration</li>
+            <li><strong>Frontend:</strong> HTML, CSS, Bootstrap, and JavaScript for responsive design</li>
+            <li><strong>Machine Learning:</strong> Scikit-learn models with model persistence via Pickle</li>
+            <li><strong>Data Sources:</strong> Multiple CSV datasets for symptoms, descriptions, severity levels, precautions, and treatments</li>
+        </ul>
+    </article>
+
+    <article>
+        <h2>🌟 Lessons Learned</h2>
+        <p>
+            Throughout development, I learned that building AI applications isn’t just about training a model —  
+            it’s about understanding the problem deeply, preparing the right data, and ensuring the end product is user-friendly.  
+            I also realized the importance of iteratively testing models and collecting user feedback to refine the experience.
+        </p>
+    </article>
+
+    <article>
+        <h2>🔮 Future Plans</h2>
+        <ul>
+            <li>Integration with wearable health devices for real-time monitoring</li>
+            <li>Adding voice-based symptom input for accessibility</li>
+            <li>Implementing a multilingual interface for global reach</li>
+            <li>Cloud deployment for worldwide access and scalability</li>
+            <li>Personalized health tips based on user history</li>
+        </ul>
+    </article>
 </div>
 {% endblock %}
