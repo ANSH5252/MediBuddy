@@ -17,13 +17,13 @@
 
 ## 🧰 Tech Stack
 
-**Language:** Python 🐍  
-**Frontend:** HTML, CSS, JavaScript, Bootstrap  
-**Backend:** Flask  
-**Machine Learning:** scikit-learn, XGBoost  
-**Data Handling:** pandas, NumPy  
-**Model Persistence:** pickle  
-**Other Tools:** Jupyter Notebook, Git  
+- **Language:** Python 🐍  
+- **Frontend:** HTML, CSS, JavaScript, Bootstrap  
+- **Backend:** Flask  
+- **Machine Learning:** scikit-learn, XGBoost  
+- **Data Handling:** pandas, NumPy  
+- **Model Persistence:** pickle  
+- **Other Tools:** Jupyter Notebook, Git  
 
 **Techniques Used:**  
 - Feature Encoding & Normalization  
