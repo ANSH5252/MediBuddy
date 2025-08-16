@@ -136,6 +136,10 @@ http://127.0.0.1:5000/
 - Click Predict.
 
 - See predicted disease, severity, and recommendations instantly.
+
+- Check the Video Demo .
+
+
 ---
 
 ## 📸 Screenshots
@@ -179,6 +183,11 @@ http://127.0.0.1:5000/
 
 
 <img width="1920" height="1080" alt="Pic8" src="https://github.com/user-attachments/assets/702a90fb-1a54-473c-84e0-c6a6566111de" />
+
+
+- **MediBuddy Walkthrough**
+
+
 
 ---
 
