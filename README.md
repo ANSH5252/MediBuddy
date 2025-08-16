@@ -137,7 +137,12 @@ http://127.0.0.1:5000/
 
 - See predicted disease, severity, and recommendations instantly.
 
-- Check the Video Demo .
+- Check the Demo Video .
+
+
+
+https://github.com/user-attachments/assets/ea664368-7893-4e6c-be59-10a88e4e1c20
+
 
 
 ---
@@ -185,7 +190,11 @@ http://127.0.0.1:5000/
 <img width="1920" height="1080" alt="Pic8" src="https://github.com/user-attachments/assets/702a90fb-1a54-473c-84e0-c6a6566111de" />
 
 
-- **MediBuddy Walkthrough**
+- **MediBuddy Walkthrough Video**
+
+
+
+https://github.com/user-attachments/assets/23765d99-68dc-4598-96d7-4cbe055ac89d
 
 
 
