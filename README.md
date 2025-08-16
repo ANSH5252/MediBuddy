@@ -182,4 +182,8 @@ This project is licensed under the MIT License.
 
 ## 👨‍💻 Author
 
-Anshuman Dash
+**Anshuman Dash**   
+
+[![GitHub](https://img.shields.io/badge/GitHub-Profile-black?logo=github)](https://github.com/ANSH5252) 
+
+[![LinkedIn](https://img.shields.io/badge/LinkedIn-Connect-blue?logo=linkedin)](https://www.linkedin.com/in/anshuman-dash-739793351/)
