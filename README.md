@@ -141,6 +141,45 @@ http://127.0.0.1:5000/
 ## 📸 Screenshots
 
 
+- **Symptoms Selection Page**
+
+
+<img width="1920" height="1080" alt="Pic1" src="https://github.com/user-attachments/assets/8f06ad86-f8c2-4111-a779-61127f3a5c68" />
+
+<img width="1920" height="1080" alt="Pic2" src="https://github.com/user-attachments/assets/cd1598fa-dd0a-4a0a-9d30-b58feb88c724" />
+
+
+- **Diagnosis Result Page**
+
+
+<img width="1920" height="1080" alt="Pic3" src="https://github.com/user-attachments/assets/f1ec3db5-6484-4332-b5a7-e13aeab62a44" />
+
+<img width="1920" height="1080" alt="Pic4" src="https://github.com/user-attachments/assets/84886bc2-2bf7-4b86-9613-2c736a1d5c18" />
+
+
+- **About Page**
+
+  
+<img width="1920" height="1080" alt="Pic5" src="https://github.com/user-attachments/assets/018af514-4795-4c4b-9a84-ea81880f1aaf" />
+
+
+- **Contact Page**
+
+
+<img width="1920" height="1080" alt="Pic6" src="https://github.com/user-attachments/assets/8e42b78a-a25f-4e42-9379-d53f281eff6f" />
+
+
+- **Developer Page**
+
+
+<img width="1920" height="1080" alt="Pic7" src="https://github.com/user-attachments/assets/5137fb5e-c3f6-40f0-8662-ca779492d02e" />
+
+
+- **Blog Page**
+
+
+<img width="1920" height="1080" alt="Pic8" src="https://github.com/user-attachments/assets/702a90fb-1a54-473c-84e0-c6a6566111de" />
+
 ---
 
 ## 💡 Future Enhancements
