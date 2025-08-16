@@ -68,3 +68,118 @@ MediBuddy/
 └── requirements.txt          # Python dependencies
 ```
 ---
+
+## 🖥️ How to Run Locally
+
+1️⃣ **Clone the repository**  
+```
+git clone https://github.com/ANSH5252/MediBuddy.git
+cd MediBuddy
+```
+2️⃣ **Install dependencies**
+```
+pip install -r requirements.txt
+```
+3️⃣ **Start the Flask server**
+- Open the **Terminal** in **Visual Studio Code** then **Paste** the follwing command and hit **Enter** .
+```
+python main.py
+```
+4️⃣ **Open in Browser**
+```
+http://127.0.0.1:5000/
+```
+
+---
+
+## 🔍 How It Works
+
+1️⃣ Data Preprocessing
+
+- Handle missing values
+
+- Encode categorical data
+
+- Normalize features
+
+2️⃣ Model Training
+
+- Models tested:
+
+  - Support Vector Classifier ✅ (Best performer)
+
+  - Random Forest Classifier
+
+  - Naive Bayes
+
+  - XGBoost
+
+3️⃣ Evaluation
+
+- Accuracy calculated for each model
+
+- SVC chosen for deployment
+
+4️⃣ Prediction
+
+- Input: List of symptoms
+
+- Output: Predicted disease + severity + recommended actions
+---
+
+## 🧪 Example Usage
+
+- Open the web app in a browser.
+
+- Select one or multiple symptoms from the UI.
+
+- Click Predict.
+
+- See predicted disease, severity, and recommendations instantly.
+---
+
+## 📸 Screenshots
+
+
+---
+
+## 💡 Future Enhancements
+
+- Integrate real-time health monitoring from wearable devices
+
+- Multi-language support for a wider audience
+
+- Deploy on cloud platforms for global access
+
+- Include an AI chat assistant for personalized medical advice
+---
+
+## 🤝 Contributing
+
+Contributions and feedback are welcome!
+
+- Fork the repository
+
+- Create a new feature branch
+
+- Commit your changes
+
+- Submit a pull request 🚀
+
+---
+
+## ⭐ If You Liked This Project
+
+Please consider giving it a 🌟 Star on GitHub! It helps a lot.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
+
+---
+
+## 👨‍💻 Author
+
+Anshuman Dash
